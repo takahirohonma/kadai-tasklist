@@ -26,6 +26,8 @@
         </table>
     @endif
     
+    {{ $messages->links() }}
+    
     {!! link_to_route('tasks.create', 'タスク新規作成', [], ['class' => 'btn btn-primary']) !!}
 </body>
 
