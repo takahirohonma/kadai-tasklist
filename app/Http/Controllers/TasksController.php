@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Task;
 
 class TasksController extends Controller
 {
@@ -13,7 +14,9 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -23,7 +26,9 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        $tasks = new Task;
+        
+        return view('tasks.create',['tasks'=>$tasks]);
     }
 
     /**
@@ -34,7 +39,11 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tasks = new Task;
+        $tasks->content = $request->content;
+        $tasks->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -45,7 +54,9 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        
+        return view('tasks.show', ['task'=> $task]);
     }
 
     /**
@@ -56,7 +67,9 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        
+        return view('tasks.edit', ['task'=> $task]);
     }
 
     /**
@@ -68,7 +81,11 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->content = $request->content;
+        $task->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -79,6 +96,9 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+        
+        return redirect('/');
     }
 }
