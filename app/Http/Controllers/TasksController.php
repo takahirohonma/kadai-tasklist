@@ -15,7 +15,7 @@ class TasksController extends Controller
     public function index()
     {
         $tasks = Task::paginate(25);
-        
+
         return view('tasks.index', ['tasks' => $tasks]);
     }
 
@@ -86,7 +86,8 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        // dd($request);
         $request->validate([
         'status' => 'required|max:10',
         'content' => 'required|max:255'
