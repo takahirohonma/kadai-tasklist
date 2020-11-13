@@ -83,7 +83,14 @@ class TasksController extends Controller
     {
         $task = Task::findOrFail($id);
         
-        return view('tasks.show', ['task'=> $task]);
+        if (\Auth::id() === $task->user_id){
+            return view('tasks.show', ['task'=> $task]);
+        }
+        else{
+            return redirect('/tasks');
+        }
+        
+        
     }
 
     /**
@@ -136,6 +143,6 @@ class TasksController extends Controller
         }
         // $task->delete();
         
-        return back();
+        return redirect('/tasks');
     }
 }

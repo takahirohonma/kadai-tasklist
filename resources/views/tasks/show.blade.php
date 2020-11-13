@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <body>
+        @if (Auth::id() == $task->user_id)
         <h1>id = {{ $task->id }} のメッセージ詳細ページ</h1>
     
         <table class="table table-bordered">
@@ -20,8 +21,10 @@
         {!! link_to_route('tasks.edit', 'このタスクを編集', ['task' => $task->id], ['class' => 'btn btn-light']) !!}
         
         {{-- メッセージ削除フォーム --}}
+        
     {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
         {!! Form::submit('このタスクを削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
+    @endif
     </body>
 @endsection
