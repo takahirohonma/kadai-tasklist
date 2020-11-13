@@ -18,7 +18,7 @@
             <tbody>
                 @foreach ($tasks as $task)
                 <tr>
-                    <td>{{ $task->status }}</td>
+                    <td>{!! link_to_route('tasks.show', $task->status, ['task' => $task->id]) !!}</td>
                     <td>{{ $task->content }}</td>
                     <td>{{ $task->created_at }}</td>
                     <td>
